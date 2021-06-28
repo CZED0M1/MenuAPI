@@ -19,6 +19,7 @@ class DashboardController extends AbstractController
     {
         $repo = $this->getDoctrine()->getRepository(Meal::class);
         $meal = $repo->find($id);
+
         return $this->json($meal);
     }
 
