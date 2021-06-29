@@ -1,3 +1,7 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+restaurants:
+  path: /restaurants
+  controller: App\Controller\DashboardController::helloNo
