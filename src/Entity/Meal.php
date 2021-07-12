@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Entity;
-
 use App\Repository\MealRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @ORM\Entity(repositoryClass=MealRepository::class)
@@ -26,9 +28,11 @@ class Meal
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"a"})
+     * @ORM\ManyToOne(targetEntity=Restaurant::class, cascade={"all"}, fetch="EAGER")
      */
+    #[NotBlank]
+    #[Length (max:255)]
+    #[date]
     private $restaurant;
 
     /**
@@ -36,6 +40,14 @@ class Meal
      * @Groups({"a"})
      */
     private $price;
+
+
+    public function __construct(Restaurant $restaurant, string $name, int $price)
+    {
+        $this->restaurant = $restaurant;
+        $this->name = $name;
+        $this->price = $price;
+    }
 
     public function getId(): ?int
     {
@@ -54,12 +66,12 @@ class Meal
         return $this;
     }
 
-    public function getRestaurant(): ?string
+    public function getRestaurant(): ?Restaurant
     {
         return $this->restaurant;
     }
 
-    public function setRestaurant(string $restaurant): self
+    public function setRestaurant(Restaurant $restaurant): self
     {
         $this->restaurant = $restaurant;
 
@@ -77,4 +89,14 @@ class Meal
 
         return $this;
     }
+
+
+
+
+
+
+
+
+
+
 }

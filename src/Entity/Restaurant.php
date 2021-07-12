@@ -4,6 +4,10 @@ namespace App\Entity;
 
 use App\Repository\RestaurantRepository;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Array_;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Url;
 
 /**
  * @ORM\Entity(repositoryClass=RestaurantRepository::class)
@@ -20,16 +24,18 @@ class Restaurant
     /**
      * @ORM\Column(type="string", length=255)
      */
+    #[NotBlank]
+    #[Length (max:255)]
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
+    #[NotBlank]
+    #[Url]
+    #[Length (max:255)]
     private $url;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
 
     public function getId(): ?int
     {
