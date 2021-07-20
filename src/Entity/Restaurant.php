@@ -8,6 +8,7 @@ use phpDocumentor\Reflection\Types\Array_;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Url;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=RestaurantRepository::class)
@@ -18,11 +19,13 @@ class Restaurant
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("read")
      */
     #[NotBlank]
     #[Length (max:255)]
@@ -30,6 +33,7 @@ class Restaurant
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("read")
      */
     #[NotBlank]
     #[Url]
